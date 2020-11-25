@@ -19,6 +19,23 @@ import java.util.stream.Collectors;
 @Slf4j
 public class WardrobeSelector {
 
+    /**
+     * Based on the given apparels information, devises hard and soft constraints to come up with a wardrobe-selection.
+     * Maintaining freshness-related restrictions and only allowing matching-pairs constitute as hard-constraints,
+     * whereas striving to maximize variety in the wardrobe selection constitutes as a soft-constraint.
+     * <p>
+     * Currently supports only two kinds of apparels viz. tops and bottoms.
+     *
+     * @param days             number of days for which the selection needs to be done
+     * @param nTops            number of available tops
+     * @param nBottoms         number of available bottoms
+     * @param topsFreshness    mapping of top-id to the number of days it can be worn consecutively
+     * @param bottomsFreshness mapping of bottom-id to the number of days it can be worn consecutively
+     * @param matchingPairs    allowed combination of top & bottom to be assigned on a given day
+     * @return if solution found then
+     * selected wardrobe in the form of day-wise assignments of tops and bottoms i.e. [(day, top, bottom)*]
+     * else null
+     */
     public WardrobeSelection select(int days, int nTops, int nBottoms,
                                     List<Pair<Integer, Integer>> topsFreshness, List<Pair<Integer, Integer>> bottomsFreshness,
                                     List<Pair<Integer, Integer>> matchingPairs) {
