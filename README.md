@@ -10,8 +10,8 @@ Given information about available apparels, the tool assigns them to the specifi
 ## Implementation 
 - The tool uses *choco-solver - a constraint-programming library* to implement the model and solve it. 
 
-## Problem Modeling
-
+## Mathematical Model
+A brief description of the model can be found in [wardrobe-selection-math-model](wardrobe-selection-math-model.pdf).
 ## Dependencies
 - JDK 9+
 - Gradle
