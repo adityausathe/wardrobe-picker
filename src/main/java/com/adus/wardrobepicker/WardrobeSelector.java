@@ -1,6 +1,7 @@
 package com.adus.wardrobepicker;
 
 import com.codepoetics.protonpack.StreamUtils;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -36,9 +37,9 @@ public class WardrobeSelector {
      * selected wardrobe in the form of day-wise assignments of tops and bottoms i.e. [(day, top, bottom)*]
      * else null
      */
-    public WardrobeSelection select(int days, int nTops, int nBottoms,
-                                    List<Pair<Integer, Integer>> topsFreshness, List<Pair<Integer, Integer>> bottomsFreshness,
-                                    List<Pair<Integer, Integer>> matchingPairs) {
+    public Output select(int days, int nTops, int nBottoms,
+                         List<Pair<Integer, Integer>> topsFreshness, List<Pair<Integer, Integer>> bottomsFreshness,
+                         List<Pair<Integer, Integer>> matchingPairs) {
         Model model = new Model("Wardrobe Picking");
 
         IntVar[] tops = model.intVarArray("tops", days, 1, nTops);
@@ -112,15 +113,68 @@ public class WardrobeSelector {
         return itemL1Deviation;
     }
 
-    private WardrobeSelection prepareWardrobeSelection(IntVar[] tops, IntVar[] bottoms, Solution optimalSolution) {
+    private Output prepareWardrobeSelection(IntVar[] tops, IntVar[] bottoms, Solution optimalSolution) {
         AtomicInteger dayCounter = new AtomicInteger(1);
-        return new WardrobeSelection(
+        return new Output(
                 StreamUtils.zip(Arrays.stream(tops), Arrays.stream(bottoms), Pair::of)
-                        .map(pair -> new WardrobeSelection.AssignmentOfTheDay(
+                        .map(pair -> new Output.AssignmentOfTheDay(
                                 dayCounter.getAndIncrement(),
                                 optimalSolution.getIntVal(pair.getLeft()),
                                 optimalSolution.getIntVal(pair.getRight())))
                         .collect(Collectors.toList())
         );
+    }
+
+    /**
+     * Based on the given apparels information, devises hard and soft constraints to come up with a wardrobe-selection.
+     * Maintaining freshness-related restrictions and only allowing matching-pairs constitute as hard-constraints,
+     * whereas striving to maximize variety in the wardrobe selection constitutes as a soft-constraint.
+     * <p>
+     * Currently supports only two kinds of apparels viz. tops and bottoms.
+     *
+     * @param days  number of days for which the selection needs to be done
+     * @param input Following input to the selector:
+     *              - number of available tops
+     *              - number of available bottoms
+     *              - mapping of top-id to the number of days it can be worn consecutively
+     *              - mapping of bottom-id to the number of days it can be worn consecutively
+     *              - allowed combination of top & bottom to be assigned on a given day
+     * @return if solution found then
+     * selected wardrobe in the form of day-wise assignments of tops and bottoms i.e. [(day, top, bottom)*]
+     * else null
+     */
+    public Output select(int days, Input input) {
+        return select(days, input.getNTops(), input.getNBottoms(),
+                input.getTopsFreshness(), input.getBottomsFreshness(), input.getMatchingPairs());
+    }
+
+    @Data
+    public static class Input {
+        private final int nTops;
+        private final int nBottoms;
+        private final List<Pair<Integer, Integer>> topsFreshness;
+        private final List<Pair<Integer, Integer>> bottomsFreshness;
+        private final List<Pair<Integer, Integer>> matchingPairs;
+    }
+
+    @ToString
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Output {
+
+        private List<AssignmentOfTheDay> assignmentOfTheDays;
+
+        @ToString
+        @Getter
+        @Setter
+        @AllArgsConstructor
+        @NoArgsConstructor
+        public static class AssignmentOfTheDay {
+            int day;
+            int top;
+            int bottom;
+        }
     }
 }

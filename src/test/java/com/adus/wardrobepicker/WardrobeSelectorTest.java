@@ -30,17 +30,17 @@ class WardrobeSelectorTest {
         );
 
         // when
-        WardrobeSelection wardrobeSelection = new WardrobeSelector()
+        WardrobeSelector.Output wardrobeSelection = new WardrobeSelector()
                 .select(days, nTops, nBottoms, topsFreshness, bottomsFreshness, matchingPairs);
 
         // then
         assertEquals(
-                "WardrobeSelection" +
+                "WardrobeSelector.Output" +
                         "(" +
                         "assignmentOfTheDays=" +
                         "[" +
-                        "WardrobeSelection.AssignmentOfTheDay(day=1, top=1, bottom=1), " +
-                        "WardrobeSelection.AssignmentOfTheDay(day=2, top=2, bottom=1)" +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=1, top=1, bottom=1), " +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=2, top=2, bottom=1)" +
                         "]" +
                         ")",
                 wardrobeSelection.toString());
@@ -68,18 +68,18 @@ class WardrobeSelectorTest {
                 Pair.of(3, 1), Pair.of(3, 2));
 
         // when
-        WardrobeSelection wardrobeSelection = new WardrobeSelector()
+        WardrobeSelector.Output wardrobeSelection = new WardrobeSelector()
                 .select(days, nTops, nBottoms, topsFreshness, bottomsFreshness, matchingPairs);
 
         // then
         assertEquals(
-                "WardrobeSelection" +
+                "WardrobeSelector.Output" +
                         "(" +
                         "assignmentOfTheDays=" +
                         "[" +
-                        "WardrobeSelection.AssignmentOfTheDay(day=1, top=1, bottom=1), " +
-                        "WardrobeSelection.AssignmentOfTheDay(day=2, top=3, bottom=1), " +
-                        "WardrobeSelection.AssignmentOfTheDay(day=3, top=2, bottom=2)" +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=1, top=1, bottom=1), " +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=2, top=3, bottom=1), " +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=3, top=2, bottom=2)" +
                         "]" +
                         ")",
                 wardrobeSelection.toString());
@@ -112,20 +112,20 @@ class WardrobeSelectorTest {
         );
 
         // when
-        WardrobeSelection wardrobeSelection = new WardrobeSelector()
+        WardrobeSelector.Output wardrobeSelection = new WardrobeSelector()
                 .select(days, nTops, nBottoms, topsFreshness, bottomsFreshness, matchingPairs);
 
         // then
         assertEquals(
-                "WardrobeSelection" +
+                "WardrobeSelector.Output" +
                         "(" +
                         "assignmentOfTheDays=" +
                         "[" +
-                        "WardrobeSelection.AssignmentOfTheDay(day=1, top=3, bottom=1), " +
-                        "WardrobeSelection.AssignmentOfTheDay(day=2, top=2, bottom=1), " +
-                        "WardrobeSelection.AssignmentOfTheDay(day=3, top=5, bottom=2), " +
-                        "WardrobeSelection.AssignmentOfTheDay(day=4, top=4, bottom=2), " +
-                        "WardrobeSelection.AssignmentOfTheDay(day=5, top=1, bottom=1)" +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=1, top=3, bottom=1), " +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=2, top=2, bottom=1), " +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=3, top=5, bottom=2), " +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=4, top=4, bottom=2), " +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=5, top=1, bottom=1)" +
                         "]" +
                         ")",
                 wardrobeSelection.toString());
@@ -158,19 +158,19 @@ class WardrobeSelectorTest {
         );
 
         // when
-        WardrobeSelection wardrobeSelection = new WardrobeSelector()
+        WardrobeSelector.Output wardrobeSelection = new WardrobeSelector()
                 .select(days, nTops, nBottoms, topsFreshness, bottomsFreshness, matchingPairs);
 
         // then
         assertEquals(
-                "WardrobeSelection" +
+                "WardrobeSelector.Output" +
                         "(" +
                         "assignmentOfTheDays=" +
                         "[" +
-                        "WardrobeSelection.AssignmentOfTheDay(day=1, top=5, bottom=2), " +
-                        "WardrobeSelection.AssignmentOfTheDay(day=2, top=3, bottom=1), " +
-                        "WardrobeSelection.AssignmentOfTheDay(day=3, top=2, bottom=1), " +
-                        "WardrobeSelection.AssignmentOfTheDay(day=4, top=4, bottom=2)" +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=1, top=5, bottom=2), " +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=2, top=3, bottom=1), " +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=3, top=2, bottom=1), " +
+                        "WardrobeSelector.Output.AssignmentOfTheDay(day=4, top=4, bottom=2)" +
                         "]" +
                         ")",
                 wardrobeSelection.toString());
@@ -196,7 +196,7 @@ class WardrobeSelectorTest {
         );
 
         // when
-        WardrobeSelection wardrobeSelection = new WardrobeSelector()
+        WardrobeSelector.Output wardrobeSelection = new WardrobeSelector()
                 .select(days, nTops, nBottoms, topsFreshness, bottomsFreshness, matchingPairs);
 
         // then

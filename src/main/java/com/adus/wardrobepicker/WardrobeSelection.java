@@ -20,7 +20,7 @@ public class WardrobeSelection {
     @NoArgsConstructor
     public static class AssignmentOfTheDay {
         int day;
-        int top;
-        int bottom;
+        String top;
+        String bottom;
     }
 }
